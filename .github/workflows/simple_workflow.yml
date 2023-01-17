@@ -1,0 +1,54 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Simple_Workflow
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  
+  Create_commit:
+
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+
+    #  - name: Create Issue using REST API
+    #     run: |
+    #       curl --request POST \
+    #       --url https://api.github.com/repos/${{ github.repository }}/issues \
+    #       --header "X-GitHub-Api-Version: 2022-11-28" \
+    #       --header 'authorization: Bearer ${{ secrets.PAT }}' \
+    #       --header 'content-type: application/json' \
+    #       --data '{
+    #         "title": "Automated issue for commit: ${{ github.sha }}",
+    #         "body": "This issue was automatically created by the Github actions workflow  **${{ github.workflow }}**. \n\n The commit Hash was: _${{ github.sha }}_." 
+    #         }'  
+      - name: "HELLO SECRETS"
+        run: echo "my secret is ${{ secrets.LIDOR }}"    
+      - name: "USE ENVIRONMENT VARIABLE"
+        run: |
+          echo "my variable is ${{ vars.MYVAR }}"
+          echo "Home: ${HOME}"
+          echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
+          echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
+          echo "GITHUB_ACTOR: ${GITHUB_ACTOR}"
+          echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
+          echo "GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}"
+          echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
+          echo "GITHUB_SHA: ${GITHUB_SHA}"
+          echo "GITHUB_REF: ${GITHUB_REF}"
